@@ -1,6 +1,9 @@
 {
   "name": "cic-core-library",
   "version": "0.0.4",
+  "publishConfig": {
+    "@snopbear:registry": "https://npm.pkg.github.com"
+  },
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0",
