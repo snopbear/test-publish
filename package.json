@@ -1,6 +1,9 @@
 {
   "name": "cic-workspace",
   "version": "0.0.0",
+  "publishConfig": {
+    "@snopbear:registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
