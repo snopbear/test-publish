@@ -1,0 +1,51 @@
+<ng-template ngFor let-cellConfig [ngForOf]="tableColumns">
+  <!-- Text cell -->
+  <td *ngIf="cellConfig.type === 'text'">
+    <!-- Renders a list of text or single line of text based on dataKey data type -->
+    <ng-container *ngIf="isString(rowItem[cellConfig.dataKey!])">{{
+      rowItem[cellConfig.dataKey!]
+    }}</ng-container>
+
+    <ul *ngIf="!isString(rowItem[cellConfig.dataKey!])">
+      <li *ngFor="let item of rowItem[cellConfig.dataKey!]">{{ item }}</li>
+    </ul>
+  </td>
+
+  <!-- Image cell -->
+  <td *ngIf="cellConfig.type === 'image'">
+    <figure>
+      <img [src]="rowItem[cellConfig.dataKey!]" alt="table-img" />
+    </figure>
+  </td>
+
+  <!-- Checkbox cell -->
+  <td *ngIf="cellConfig.type === 'checkbox'">
+    <p-tableCheckbox [value]="rowItem['id']"></p-tableCheckbox>
+  </td>
+
+  <!-- Switch cell -->
+  <td *ngIf="cellConfig.type === 'switch'">
+    <p-inputSwitch
+      [(ngModel)]="rowItem[cellConfig.dataKey!]"
+      (ngModelChange)="buttonClicked(cellConfig.switchConfig?.event!)"
+    ></p-inputSwitch>
+  </td>
+
+  <!-- Link cell -->
+  <td *ngIf="cellConfig.type === 'link'">
+    <a [href]="rowItem[cellConfig.dataKey!]">{{
+      rowItem[cellConfig.dataKey!]
+    }}</a>
+  </td>
+
+  <!-- Buttons cell -->
+  <td *ngIf="cellConfig.type === 'button'">
+    <cic-button
+      *ngFor="let button of cellConfig.btnConfig"
+      [severity]="button.severity!"
+      [btnIcon]="button.icon!"
+      [label]="button.label!"
+      (click)="buttonClicked(button.event)"
+    ></cic-button>
+  </td>
+</ng-template>

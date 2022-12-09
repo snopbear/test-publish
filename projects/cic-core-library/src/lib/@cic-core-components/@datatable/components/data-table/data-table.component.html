@@ -1,0 +1,39 @@
+<p-table
+  [value]="data"
+  styleClass="{{ size ? 'p-datatable-' + size : '' }} {{
+    gridLines ? 'p-datatable-gridlines' : ''
+  }} {{ isStriped ? 'p-datatable-striped' : '' }}"
+  [paginator]="paginate"
+  [rows]="rowsCountPerPage"
+  [rowsPerPageOptions]="rowsPerPageOptions"
+  [showCurrentPageReport]="showPageReport"
+  [scrollHeight]="scrollHeight === 'flex' ? scrollHeight : scrollHeight + 'px'"
+>
+  <!-- Table caption -->
+  <ng-template pTemplate="caption">
+    <div class="table-caption">
+      <ng-content select="[caption]" *ngIf="!captionMessage"></ng-content>
+      <div *ngIf="captionMessage">{{ captionMessage }}</div>
+      <cic-button
+        *ngIf="hasAddButton"
+        label="Add"
+        btnIcon="pi-plus"
+      ></cic-button>
+    </div>
+  </ng-template>
+  <!-- Table header -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let head of tableColumns">{{ head.title }}</th>
+    </tr>
+  </ng-template>
+  <!-- Table body -->
+  <ng-template pTemplate="body" let-item>
+    <tr cic-data-table-row [rowItem]="item" [tableColumns]="tableColumns"></tr>
+  </ng-template>
+  <!-- Table summary -->
+  <ng-template pTemplate="summary">
+    <ng-content select="[summary]" *ngIf="!summaryMessage"></ng-content>
+    <div *ngIf="summaryMessage">{{ summaryMessage }}</div>
+  </ng-template>
+</p-table>
